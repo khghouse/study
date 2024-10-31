@@ -1,0 +1,129 @@
+
+## 03. 이미지 pull
+
+- app store = docker hub
+- program = image
+- process = container
+
+
+- docker hub에서 image를 다운로드 받는 행위를 pull이라고 한다.
+- image를 실행시키는 행위를 run이라고 한다.
+
+<br />
+
+이미지를 다운 받는 방법
+1. dockerhub.com
+2. 이미지 검색 (예 : web server -> httpd로 검색)
+```shell
+docker pull httpd
+```
+3. 이미지 확인
+```shell
+docker images
+```
+
+<br />
+
+## 04. 컨테이너 run
+
+컨테이너 실행 (만들기)
+```shell
+# docker run 이미지
+docker run --name ws httpd
+```
+
+실행중인 컨테이너 확인
+```shell
+docker ps
+```
+
+컨테이너 중지
+```shell
+# docker step 컨테이너명
+docker step ws
+```
+
+전체 컨테이너 확인
+```shell
+docker ps -a
+```
+
+중지된 컨테이너 실행
+```shell
+# docker start 컨테이너명
+docker start ws
+```
+
+컨테이너 로그 확인
+```shell
+# docker logs 컨테이너명
+docker logs ws
+```
+
+컨테이너 실시간 로그 확인
+```shell
+# docker logs -f 컨테이너명
+docker logs -f ws
+```
+
+컨테이너 삭제
+```shell
+# docker rm 컨테이너명
+docker rm ws
+```
+
+이미지 삭제
+```shell
+# docker rmi 이미지
+docker rmi httpd 
+```
+
+<br />
+
+## 05. 네트워크
+
+포트 (Port)
+- 네트워크에서 여러 소프트웨어를 구분하는 값
+- 아파치 웹 서버는 80번 포트에서 접속을 대기하고 있도록 설정되어 있다.
+
+도커 호스트 (Host)
+- 웹 서버가 컨테이너에 설치되고, 이 컨테이너가 설치된 운영체제를 도커 호스트라고 부른다.
+- 호스트와 컨테이너는 독립적인 실행 환경이므로 각자 독립적인 포트를 갖는다.
+
+컨테이너 실행 (+포트 포워딩)
+```shell
+# docker run -p HOST_PORT:CONTAINER_PORT IMAGE
+docker run -p 8080:80 httpd
+```
+
+웹서버 접속
+- http://{ec2:public_ip}:8080
+
+<br />
+
+## 06. 명령어 실행
+컨테이너 내부 접속
+```shell
+# docker exec 컨테이너명 [명령어]
+docker exec ws /bin/sh
+```
+컨테이너 내부 접속 유지
+```shell
+# docker exec -it 컨테이너명 [명령어]
+docker exec -it ws /bin/bash
+```
+VIM 에디터 설치
+```shell
+apt update
+apt install vim
+```
+
+<br />
+
+## 07. 호스트와 컨테이너의 파일시스템 연결
+
+실행 환경은 컨테이너에게 맡기고 파일 관리는 호스트에서 하는 방법
+```shell
+# docker run -v 호스트 디렉터리:컨테이너 디렉터리
+docker run -p 8080:80 -v /home/ec2-user/htdocs:/usr/local/apache2/htdocs/ --name ws httpd
+```
