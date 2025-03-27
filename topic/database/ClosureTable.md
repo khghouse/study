@@ -88,3 +88,9 @@
 - https://github.com/khghouse/board/blob/master/src/main/java/com/board/domain/comment/CommentHierarchyRepository.java
 - https://github.com/khghouse/board/blob/master/src/main/java/com/board/service/comment/CommentService.java
 - https://github.com/khghouse/board/blob/master/src/main/java/com/board/service/comment/CommentHierarchySerivce.java
+
+<br />
+
+#### 참고 자료
+
+- ChatGPT 대화 내용

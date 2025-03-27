@@ -74,3 +74,9 @@ standaloneSetup()에서는 스프링 컨텍스트를 로드하지 않기 때문�
 ### 관련 코드
 - https://github.com/khghouse/board/blob/master/src/test/java/com/board/support/RestDocsSupport.java
 - https://github.com/khghouse/board/blob/master/src/test/java/com/board/support/security/SecurityUserArgumentResolver.java
+
+<br />
+
+#### 참고 자료
+
+- ChatGPT 대화 내용
