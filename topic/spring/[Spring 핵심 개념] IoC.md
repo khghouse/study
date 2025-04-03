@@ -5,6 +5,17 @@
 
 <br />
 
+### IoC 컨테이너의 역할
+
+- 객체(Bean) 생성
+    - @Component, @Service, @Repository, @Controller 등의 어노테이션으로 선언된 클래스를 객체로 생성
+- 객체 간의 의존성 주입
+    - DI를 통해 객체 간 의존성 주입
+- 생명주기 관리
+    - 객체의 초기화와 소멸을 관리
+
+<br />
+
 ### IoC를 적용하지 않은 경우 (직접 객체 생성)
 
 ```java
@@ -13,13 +24,15 @@ public class MemberService {
 
     // MemberService 내부에서 직접 객체를 생성 (강한 결합)
     public MemberService() {
-        this.memberRepository = new MemberRepositoryImpl(); // 구현체
+        this.memberRepository = new MemberRepositoryImpl(); // 구현
     }
 }
 ```
 
 - MemberRepository의 구현체가 변경되면 MemberService도 수정해야 함
 - 테스트 시 MemberRepository를 Mock 객체로 대체하기 어려움
+
+<br />
 
 ### IoC를 적용한 경우
 
