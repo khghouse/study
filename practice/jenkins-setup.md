@@ -1,16 +1,11 @@
 ### 실습 목표
 
+- AWS EC2 서버에 Docker 기반 Jenkins를 설치
+- Spring Boot 프로젝트를 CI/CD 파이프라인으로 빌드 및 배포할 수 있는 환경 구축
+
 <br />
 
 ### 1. EC2 인스턴스 기본 세팅
-
-#### 자바 설치
-
-```shell
-sudo yum update -y
-sudo yum install java-17-amazon-corretto -y
-java -version
-```
 
 #### Docker & Docker Compose 설치
 
