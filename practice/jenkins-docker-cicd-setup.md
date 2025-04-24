@@ -15,8 +15,10 @@ sudo systemctl start docker
 sudo systemctl enable docker
 docker --version
 
-# Docker group에 현재 유저 추가
+# 현재 사용자(ec2-user)를 docker 그룹에 추가
 sudo usermod -aG docker ec2-user
+
+# 변경된 그룹 권한을 현재 셀에 반영
 newgrp docker
 ```
 
@@ -26,7 +28,7 @@ newgrp docker
 # 베이스 이미지 : 공식 Jenkins LTS + JDK 17
 FROM jenkins/jenkins:lts-jdk17
 
-# root 권한으로 변경
+# 패키지 설치를 위해 root 사용자로 변경
 USER root
 
 # 필요한 패키지 업데이트 및 설치
@@ -44,7 +46,7 @@ RUN curl -fsSL https://download.docker.com/linux/debian/gpg | apt-key add - && \
     apt-get update && \
     apt-get install -y docker-ce-cli
 
-# 다시 Jenkins 기본 사용자로 변경
+# Jenkins 사용 권한으로 되돌림
 USER jenkins
 ```
 
@@ -66,6 +68,8 @@ docker rm jenkins || true
 
 # jenkins_home 디렉토리 생성 및 퍼미션 설정
 mkdir -p ~/jenkins_home
+
+# Jenkins UID(1000)에 디렉토리 소유권 부여
 sudo chown -R 1000:1000 ~/jenkins_home
 
 # Jenkins 컨테이너 실행
@@ -213,7 +217,7 @@ sudo vi /etc/fstab
 ### 8. 빌드 및 배포
 
 - Jenkins 접속 -> Job 선택 -> 지금 빌드 버튼 클릭
-    - 성공 시 콘솔에 Spring Boot 프로젝트 빌드 → Docker 이미지 생성 → 컨테이너 실행까지 완료됨
+    - 성공 시 콘솔에 Spring Boot 프로젝트 빌드 → Docker 이미지 생성 → 컨테이너 실행
 
 
 <br />
