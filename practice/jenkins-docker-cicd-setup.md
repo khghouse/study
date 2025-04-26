@@ -83,6 +83,48 @@ docker run -d --name jenkins \
   custom-jenkins:lts-jdk17-docker
 ```
 
+### (선택) 4-1. docker-compose.yml
+
+위 Jenkins 컨테이너 실행을 docker-compose로 관리
+
+```yaml
+version: '3.8'
+
+services:
+  jenkins:
+    build:
+      context: .
+    container_name: jenkins
+    ports:
+      - "8080:8080"
+      - "50000:50000"
+    volumes:
+      - jenkins_home:/var/jenkins_home
+      - /var/run/docker.sock:/var/run/docker.sock
+      - /etc/group:/etc/group:ro
+    restart: unless-stopped
+    group_add:
+      - "${DOCKER_GID:-998}"
+
+volumes:
+  jenkins_home:
+```
+
+```shell
+# 0. Docker Compose 설치
+sudo curl -L "https://github.com/docker/compose/releases/download/v2.24.2/docker-compose-$(uname -s)-$(uname -m)" -o /usr/local/bin/docker-compose
+sudo chmod +x /usr/local/bin/docker-compose
+
+# 1. 현재 도커 그룹 ID 확인
+export DOCKER_GID=$(getent group docker | cut -d: -f3)
+
+# 2. .env 파일 생성
+echo "DOCKER_GID=$DOCKER_GID" > .env
+
+# 3. Jenkins 빌드 및 실행
+docker-compose up -d --build
+```
+
 ### 5. Jenkins 접속 및 설정
 
 #### 접속 URL
