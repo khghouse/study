@@ -102,6 +102,8 @@ services:
       - jenkins_home:/var/jenkins_home
       - /var/run/docker.sock:/var/run/docker.sock
       - /etc/group:/etc/group:ro
+    environment:
+      - TZ=Asia/Seoul
     restart: unless-stopped
     group_add:
       - "${DOCKER_GID:-998}"
@@ -136,7 +138,7 @@ http://{EC2_PUBLIC_IP}:8080
 #### 초기 비밀번호 확인
 
 ```shell
-cat /jenkins_home/secrets/initialAdminPassword
+docker exec jenkins cat /var/jenkins_home/secrets/initialAdminPassword
 ```
 
 #### 플러그인 설치
