@@ -1,4 +1,4 @@
-b### 0. 이전 작업
+### 0. 이전 작업
 
 - [jenkins-docker-cicd-setup](jenkins-docker-cicd-setup.md)
 
