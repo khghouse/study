@@ -37,7 +37,7 @@ public class UserService {
     public void create() {
         long start = System.currentTimeMillis();
 
-        /* 주문 처리 로직 */
+        /* 처리 로직 */
 
         long end = System.currentTimeMillis();
         System.out.println("처리 시간 : " + (end - start) + "ms");
@@ -73,7 +73,7 @@ public class LoggingAspect {
 @Service
 public class UserService {
     public void create() {
-        /* 주문 처리 로직 */
+        /* 처리 로직 */
     }
 }
 
