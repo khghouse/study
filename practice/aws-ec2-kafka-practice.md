@@ -168,3 +168,9 @@ Hello Kafka!
 안녕 카프카!
 ```
 
+<br />
+
+#### 참고 자료
+
+- Claude.ai 대화 내용
+- ChatGPT 대화 내용
